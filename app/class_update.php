@@ -21,7 +21,9 @@
       <table id="table_id" class="display">
         <thead>
           <tr>
-            <th>Stdent Name</th>
+            <th>Class Name</th>
+            <th>Teacher</th>
+            <th>Subject</th>
           </tr>
         </thead>
         <tbody>
@@ -37,6 +39,8 @@
             echo "
               <tr>
                 <td><a href='class_update_script.php?id=".$r[$i]["id_class"]."' class='btn btn-warning'>U</a> ".$r[$i]["class_name"]."</td>
+                <td>".$r[$i]["teacher_name"]."</td>
+                <td>".$r[$i]["subject_name"]."</td>
               </tr>
                 ";
             $i++;

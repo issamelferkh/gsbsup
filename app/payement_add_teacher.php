@@ -19,15 +19,17 @@ include_once '../config/connection.php';
       $teacher_class = explode(",", $_POST['teacher_class']);
       $teacher_name = $teacher_class[0];
       $class_name = $teacher_class[1];
+
+      $pay_date = $_POST['pay_date'];
       $pay_month = $_POST['pay_month'];
       $pay_amount = $_POST['pay_amount'];
       $remarque = "GSB School paid <B>".$pay_amount." Dhs</B> to <B>".$teacher_name."</B> of <B>".$class_name."</B> class for the month <B>".$pay_month."</B>";
       $pay_amount = $pay_amount * (-1);
 
-      $query = 'INSERT INTO `payement_teacher` (`teacher_name`,`class_name`,`pay_month`,`pay_amount`,`remarque`) 
-      VALUES (?,?,?,?,?)';
+      $query = 'INSERT INTO `payement_teacher` (`teacher_name`,`class_name`,`pay_month`,`pay_amount`,`remarque`,`pay_date`) 
+      VALUES (?,?,?,?,?,?)';
         $query = $db->prepare($query);
-        if ($query->execute([$teacher_name,$class_name,$pay_month,$pay_amount,$remarque])) {
+        if ($query->execute([$teacher_name,$class_name,$pay_month,$pay_amount,$remarque,$pay_date])) {
           echo "
             <script>
               const msg = 'Done.';
@@ -79,7 +81,7 @@ include_once '../config/connection.php';
               while ($i < $c) {
                 echo "
                   <tr>
-                    <td><input type='radio' class='form-check-input' name='teacher_class' value='".$r[$i]["teacher_name"].", ".$r[$i]["class_name"]."'> ".$r[$i]["teacher_name"]."</td>
+                    <td><input type='radio' class='form-check-input' name='teacher_class' value='".$r[$i]["teacher_name"].",".$r[$i]["class_name"]."'> ".$r[$i]["teacher_name"]."</td>
                     <td>".$r[$i]["class_name"]."</td>
                   </tr>
                     ";
@@ -92,13 +94,17 @@ include_once '../config/connection.php';
       </div>
       <!-- Other Inputs -->
       <div class="row">
-        <div class="p-2 col-md-6">
-          Month
-          <input type="month" name="pay_month" class="form-control" placeholder="Class Name">
+        <div class="p-2 col-md-4">
+          Payment Date
+          <input type="date" name="pay_date" class="form-control" placeholder="Payment Date" required >
         </div>
-        <div class="p-2 col-md-6">
+        <div class="p-2 col-md-4">
+          Month
+          <input type="month" name="pay_month" class="form-control" placeholder="Class Name" required >
+        </div>
+        <div class="p-2 col-md-4">
           Amount
-          <input type="text" name="pay_amount" class="form-control" placeholder="Amount on Dhs">
+          <input type="text" name="pay_amount" class="form-control" placeholder="Amount on Dhs" required >
         </div>
       </div>
       <button type="submit" name="payement_add_teacher" class="btn btn-primary">Submit</button>

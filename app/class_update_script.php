@@ -4,11 +4,13 @@ include_once '../config/connection.php';
 
   if(isset($_POST["class_update"])) {
     $class_name = $_POST['class_name'];
+    $teacher_name = $_POST['teacher_name'];
+    $subject_name = $_POST['subject_name'];
     $id_class = $_POST['id_class'];
 
-    $query = "UPDATE `class` SET `class_name`=? WHERE `id_class`=?"; 
+    $query = "UPDATE `class` SET `class_name`=?,`teacher_name`=?,`subject_name`=? WHERE `id_class`=?"; 
     $query = $db->prepare($query);
-    if ($query->execute([$class_name,$id_class])) {
+    if ($query->execute([$class_name,$teacher_name,$subject_name,$id_class])) {
       echo "
         <script>
           const msg = 'Done.';
@@ -44,14 +46,41 @@ include_once '../config/connection.php';
     <form method="POST">
       <input type="hidden" name="id_class" value="<?= $_GET['id']; ?>">
       <div class="row">
-        <div class="p-2 col-md-12">
-          <input type="text" name="class_name" class="form-control"  value="<?php if (isset($row['class_name'])) echo $row['class_name']; ?>" placeholder="class Full Name">
+        <div class="p-2 col-md-4">
+          Class Name
+          <input type="text" name="class_name" class="form-control"  value="<?php if (isset($row['class_name'])) echo $row['class_name']; ?>" placeholder="class Full Name" required>
         </div>
+
+        <div class="p-2 col-md-4">
+          Select a Teacher
+          <select name="teacher_name" class="form-select" required>
+            <option value="<?= $row['teacher_name']; ?>"><?= $row['teacher_name']; ?></option>
+            <!-- Fech Teacher Data -->
+            <?php
+              $q = "SELECT * FROM `teacher`"; //q = query
+              $q = $db->query($q);
+              $q->execute();
+              $c = $q->rowCount(); //c = count
+              $r = $q->fetchAll(PDO::FETCH_ASSOC); // r = row
+              $i = 0; // i = index
+              while ($i < $c) {
+                echo "
+                  <option value='".$r[$i]["teacher_name"]."'>".$r[$i]["teacher_name"]."</option>
+                    ";
+                $i++;
+              }
+            ?>
+          </select>
+        </div>
+
+        <div class="p-2 col-md-4">
+          Subject Name
+          <input type="text" name="subject_name" class="form-control" value="<?php if (isset($row['subject_name'])) echo $row['subject_name']; ?>" placeholder="Subject Name" required>
+        </div>
+
       </div>
       <button type="submit" name="class_update" class="btn btn-primary">Submit</button>
-    </form>
-
-    
+    </form>    
   </div>
 </main>
 

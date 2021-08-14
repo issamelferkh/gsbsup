@@ -2,6 +2,17 @@
 gsbsup
 
 ## Todo
+- [x] In "Add Student Payment" create new Input "Payment Date"
+- [x] In "Add Teacher Payment" create new input "Payment Date"
+- [x] When Update Class: update Teacher Name and Subject Name also
+
+- When Update Student Name, it's not updated in payement page (payement journal)
+- When Update Teacher Name, it's not updated in payement page (payement journal)
+- When Update Class Name, it's not updated in payement page (payement journal)
+
+			- Compte User
+
+
 - [ ] not add 2 students with the same name
 - Add new class:
   - [x] teacher + subject => recured +

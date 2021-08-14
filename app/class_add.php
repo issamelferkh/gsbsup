@@ -3,8 +3,6 @@
 include_once '../config/connection.php';
 
   if(isset($_POST["class_add"])) {
-    // Array ( [class_name] => qqq [] => aq [] => qqqq [class_add] => )
-
     if( empty($_POST["class_name"]) ) {
       $msg = 'All fields are required !';	
     } else {
