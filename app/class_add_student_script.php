@@ -18,11 +18,12 @@ include_once '../config/connection.php';
       $id_class = $_POST['id_class'];
       $class_name = $_POST['class_name'];
       $student_name = $_POST['student_name'];
+      $teacher_name = $_POST['teacher_name'];
 
-      $query = 'INSERT INTO `class` (`class_name`,`student_name`) 
-      VALUES (?,?)';
+      $query = 'INSERT INTO `class` (`class_name`,`student_name`,`teacher_name`) 
+      VALUES (?,?,?)';
       $query = $db->prepare($query);
-      if ($query->execute([$class_name,$student_name])) {
+      if ($query->execute([$class_name,$student_name,$teacher_name])) {
         echo "
           <script>
             const msg = 'Done.';
@@ -94,10 +95,11 @@ include_once '../config/connection.php';
         <div class="row">
           <input type="hidden" name="id_class" value="<?= $_GET['id_class']; ?>" >
           <input type="hidden" name="class_name" value="<?= $_GET['class_name']; ?>" >
+          <input type="hidden" name="teacher_name" value="<?= $row['teacher_name']; ?>" >
 
-          <div class="p-2 col-md-4">
+          <div class="p-2 col-md-12">
+          Select Student<br>
             <select name="student_name" class="form-select">
-              <option selected>Add Student</option>
               <!-- Fech Student Data to add to this Class-->
               <?php
                 $q = "SELECT * FROM `student` WHERE `student_name` NOT IN 

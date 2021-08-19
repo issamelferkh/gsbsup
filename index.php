@@ -20,7 +20,7 @@ include_once './config/connection.php';
             $_SESSION['fname']=$la_case[0]['fname'];
             $_SESSION['lname']=$la_case[0]['lname'];
             $_SESSION['role']=$la_case[0]['role'];
-						header("location:app/dashboard.php");
+						header("location:app/payement_check_teacher.php");
 
 					}
 				} else {

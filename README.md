@@ -1,13 +1,11 @@
 # gsbsup
 gsbsup
 
-
-
-
-
 ## Todo
+- [ ] Devis
+- [x] Add student to class avoid "Add Student"
 - [x] Datatables
-
+- [x] dashboards
 
 ## Template
 - [x] NavBar
@@ -33,7 +31,6 @@ gsbsup
 - [x] Update
 - [x] Delete
 
-
 ## Teachter Mngt
 - [x] Create
 - [x] List
@@ -43,26 +40,15 @@ gsbsup
 
 ## Class
 - [x] Create
-  - [ ] add student to class
+  - [x] add student to class
 - [x] List
 - [x] Detail
 - [x] Update
 - [x] Delete
 
-
-
-## Presence
 ## Payement
 - [x] add Student Payement
 - [x] Check Student Payement
-## Needed
-- Imtach bdat GSB
-- 
-
-## Questions
-- class for each mounth or general Class
-  - General Class need to update for each mounnth
-
-
-
-## Todo
+- [x] Add Teacher Payement
+- [x] Check Teacher Payement
+- [x] Teacher Payement All Details

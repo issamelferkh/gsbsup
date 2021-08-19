@@ -12,48 +12,33 @@
 <?php
 include_once '../config/connection.php';
 
-  if(isset($_POST["payement_add_student"])) {
-    if( empty($_POST["student_class"]) ) {
+  if(isset($_POST["payement_add_teacher"])) {
+    if( empty($_POST["teacher_class"]) ) {
       $msg = 'All fields are required !';	
     } else {
-      // [student_class] => issam, aaaa [pay_month] => 2021-06 [pay_amount] => 12
-
-      $student_class = explode(",", $_POST['student_class']);
-      $student_name = $student_class[0];
-      $class_name = $student_class[1];
-      $teacher_name = $student_class[2];
-
+      $teacher_class = explode(",", $_POST['teacher_class']);
+      $teacher_name = $teacher_class[0];
+      $class_name = $teacher_class[1];
       $pay_month = $_POST['pay_month'];
       $pay_amount = $_POST['pay_amount'];
-      $pay_amount_teacher = 70;
+      $remarque = "GSB School paid <B>".$pay_amount." Dhs</B> to <B>".$teacher_name."</B> of <B>".$class_name."</B> class for the month <B>".$pay_month."</B>";
+      $pay_amount = $pay_amount * (-1);
 
-      // Add to Payment Teacher
-      $student_name = $student_class[0];
-      $remarque = "<B>".$student_name."</B> from <B>".$class_name."</B> class 
-                paid GSB School <B>".$pay_amount." Dhs</B> of which <B>".$pay_amount_teacher." Dhs</B> for the Teacher <B>".$teacher_name."</B> 
-                for the month <B>".$pay_month."</B>";
-
-      $query = 'INSERT INTO `payement_teacher` (`teacher_name`,`class_name`,`pay_amount`,`pay_month`,`remarque`) 
+      $query = 'INSERT INTO `payement_teacher` (`teacher_name`,`class_name`,`pay_month`,`pay_amount`,`remarque`) 
       VALUES (?,?,?,?,?)';
-      $query = $db->prepare($query);
-      $query->execute([$teacher_name,$class_name,$pay_amount_teacher,$pay_month,$remarque]);
-
-
-      $query = 'INSERT INTO `payement` (`student_name`,`class_name`,`pay_month`,`pay_amount`) 
-      VALUES (?,?,?,?)';
         $query = $db->prepare($query);
-        if ($query->execute([$student_name,$class_name,$pay_month,$pay_amount])) {
+        if ($query->execute([$teacher_name,$class_name,$pay_month,$pay_amount,$remarque])) {
           echo "
             <script>
               const msg = 'Done.';
-              window.location.href='payement_add_student.php?msg='+msg;
+              window.location.href='payement_check_teacher.php?msg='+msg;
             </script>
             ";
         } else {
           echo "
             <script>
               const msg = 'Sorry, something went wrong!';
-              window.location.href='payement_add_student.php?msg='+msg;
+              window.location.href='payement_check_teacher.php?msg='+msg;
             </script>
             ";
         }
@@ -71,21 +56,20 @@ include_once '../config/connection.php';
   <?php include_once("./../includes/title.php"); ?>
 
   <div class="my-3 p-3 bg-body rounded shadow-sm">
-    <h6 class="border-bottom pb-2 mb-10">Add New Student Payement</h6>
+    <h6 class="border-bottom pb-2 mb-10">Add New teacher Payement</h6>
     <form method="POST">
-      <!-- Student Table -->
+      <!-- teacher Table -->
       <div class="table-wrapper">
         <table id="table_id" class="display">
           <thead>
             <tr>
-              <th>Stdent Name</th>
-              <th>Class Name</th>
               <th>Teacher Name</th>
+              <th>Class Name</th>
             </tr>
           </thead>
           <tbody>
             <?php
-              $q = "SELECT * FROM `class` WHERE `student_name` > '' "; //q = query
+              $q = "SELECT * FROM `class` WHERE `student_name` = '' "; //q = query
               $q = $db->query($q);
               $q->execute();
               $c = $q->rowCount(); //c = count
@@ -95,9 +79,8 @@ include_once '../config/connection.php';
               while ($i < $c) {
                 echo "
                   <tr>
-                    <td><input type='radio' class='form-check-input' name='student_class' value='".$r[$i]["student_name"].",".$r[$i]["class_name"].",".$r[$i]["teacher_name"]."'> ".$r[$i]["student_name"]."</td>
+                    <td><input type='radio' class='form-check-input' name='teacher_class' value='".$r[$i]["teacher_name"].", ".$r[$i]["class_name"]."'> ".$r[$i]["teacher_name"]."</td>
                     <td>".$r[$i]["class_name"]."</td>
-                    <td>".$r[$i]["teacher_name"]."</td>
                   </tr>
                     ";
                 $i++;
@@ -118,7 +101,7 @@ include_once '../config/connection.php';
           <input type="text" name="pay_amount" class="form-control" placeholder="Amount on Dhs">
         </div>
       </div>
-      <button type="submit" name="payement_add_student" class="btn btn-primary">Submit</button>
+      <button type="submit" name="payement_add_teacher" class="btn btn-primary">Submit</button>
     </form>
   </div>
 </main>
