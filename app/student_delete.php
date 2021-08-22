@@ -36,7 +36,7 @@ $i = 0; // i = index
 while ($i < $c) {
 echo "
   <tr>
-    <td><center><a href='student_delete_script.php?id=".$r[$i]["id_student"]."' onclick='return myConfirm();' class='btn btn-danger'>X</a> ".$r[$i]["student_name"]."</center></td>
+    <td><a href='student_delete_script.php?id=".$r[$i]["id_student"]."' onclick='return myConfirm();' class='btn btn-danger'>X</a> ".$r[$i]["student_name"]."</td>
   </tr>
     ";
 $i++;
