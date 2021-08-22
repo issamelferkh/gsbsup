@@ -1,0 +1,26 @@
+[16-Aug-2021 13:55:14 Africa/Casablanca] PHP Warning:  include_once(./config/connection.php): failed to open stream: No such file or directory in /home/gsbsupma/public_html/index.php on line 3
+[16-Aug-2021 13:55:14 Africa/Casablanca] PHP Warning:  include_once(): Failed opening './config/connection.php' for inclusion (include_path='.:/opt/cpanel/ea-php73/root/usr/share/pear') in /home/gsbsupma/public_html/index.php on line 3
+[16-Aug-2021 13:55:14 Africa/Casablanca] PHP Warning:  include_once(./includes/navbar_off.php): failed to open stream: No such file or directory in /home/gsbsupma/public_html/index.php on line 85
+[16-Aug-2021 13:55:14 Africa/Casablanca] PHP Warning:  include_once(): Failed opening './includes/navbar_off.php' for inclusion (include_path='.:/opt/cpanel/ea-php73/root/usr/share/pear') in /home/gsbsupma/public_html/index.php on line 85
+[16-Aug-2021 13:55:14 Africa/Casablanca] PHP Warning:  include_once(./includes/nav_scroller_off.php): failed to open stream: No such file or directory in /home/gsbsupma/public_html/index.php on line 86
+[16-Aug-2021 13:55:14 Africa/Casablanca] PHP Warning:  include_once(): Failed opening './includes/nav_scroller_off.php' for inclusion (include_path='.:/opt/cpanel/ea-php73/root/usr/share/pear') in /home/gsbsupma/public_html/index.php on line 86
+[16-Aug-2021 13:55:14 Africa/Casablanca] PHP Warning:  include_once(./includes/footer.php): failed to open stream: No such file or directory in /home/gsbsupma/public_html/index.php on line 112
+[16-Aug-2021 13:55:14 Africa/Casablanca] PHP Warning:  include_once(): Failed opening './includes/footer.php' for inclusion (include_path='.:/opt/cpanel/ea-php73/root/usr/share/pear') in /home/gsbsupma/public_html/index.php on line 112
+[16-Aug-2021 13:55:17 Africa/Casablanca] PHP Warning:  include_once(./config/connection.php): failed to open stream: No such file or directory in /home/gsbsupma/public_html/index.php on line 3
+[16-Aug-2021 13:55:17 Africa/Casablanca] PHP Warning:  include_once(): Failed opening './config/connection.php' for inclusion (include_path='.:/opt/cpanel/ea-php73/root/usr/share/pear') in /home/gsbsupma/public_html/index.php on line 3
+[16-Aug-2021 13:55:17 Africa/Casablanca] PHP Warning:  include_once(./includes/navbar_off.php): failed to open stream: No such file or directory in /home/gsbsupma/public_html/index.php on line 85
+[16-Aug-2021 13:55:17 Africa/Casablanca] PHP Warning:  include_once(): Failed opening './includes/navbar_off.php' for inclusion (include_path='.:/opt/cpanel/ea-php73/root/usr/share/pear') in /home/gsbsupma/public_html/index.php on line 85
+[16-Aug-2021 13:55:17 Africa/Casablanca] PHP Warning:  include_once(./includes/nav_scroller_off.php): failed to open stream: No such file or directory in /home/gsbsupma/public_html/index.php on line 86
+[16-Aug-2021 13:55:17 Africa/Casablanca] PHP Warning:  include_once(): Failed opening './includes/nav_scroller_off.php' for inclusion (include_path='.:/opt/cpanel/ea-php73/root/usr/share/pear') in /home/gsbsupma/public_html/index.php on line 86
+[16-Aug-2021 13:55:17 Africa/Casablanca] PHP Warning:  include_once(./includes/footer.php): failed to open stream: No such file or directory in /home/gsbsupma/public_html/index.php on line 112
+[16-Aug-2021 13:55:17 Africa/Casablanca] PHP Warning:  include_once(): Failed opening './includes/footer.php' for inclusion (include_path='.:/opt/cpanel/ea-php73/root/usr/share/pear') in /home/gsbsupma/public_html/index.php on line 112
+[16-Aug-2021 13:56:11 Africa/Casablanca] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsbsupma_db.user' doesn't exist in /home/gsbsupma/public_html/index.php:12
+Stack trace:
+#0 /home/gsbsupma/public_html/index.php(12): PDOStatement->execute()
+#1 {main}
+  thrown in /home/gsbsupma/public_html/index.php on line 12
+[16-Aug-2021 13:56:23 Africa/Casablanca] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsbsupma_db.user' doesn't exist in /home/gsbsupma/public_html/index.php:12
+Stack trace:
+#0 /home/gsbsupma/public_html/index.php(12): PDOStatement->execute()
+#1 {main}
+  thrown in /home/gsbsupma/public_html/index.php on line 12
