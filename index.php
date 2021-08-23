@@ -99,10 +99,10 @@ include_once './config/connection.php';
     <form method="POST" action="index.php" >
       <div class="row">
         <div class="p-2 col-md-6">
-          <input type="text" name="login" class="form-control" placeholder="First name" aria-label="First name">
+          <input type="text" name="login" class="form-control" placeholder="Login">
         </div>
         <div class="p-2 col-md-6">
-          <input type="text" name="password" class="form-control" placeholder="Last name" aria-label="Last name">
+          <input type="password" name="password" class="form-control" placeholder="Password">
         </div>
       </div>
       <button type="submit" name="signin" class="btn btn-primary">Submit</button>

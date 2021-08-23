@@ -42,6 +42,15 @@ gsbsup
 - [x] Delete
 
 ## Class
+- [x] Create
+  - [ ] add student to class
+- [x] List
+- [x] Detail
+- [x] Update
+- [x] Delete
+
+
+
 ## Presence
 ## Payement
 
@@ -49,4 +58,6 @@ gsbsup
 - Imtach bdat GSB
 - 
 
-
+## Questions
+- class for each mounth or general Class
+  - General Class need to update for each mounnth
