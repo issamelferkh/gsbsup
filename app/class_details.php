@@ -15,7 +15,7 @@
   <?php include_once("./../includes/title.php"); ?>
 
   <div class="my-3 p-3 bg-body rounded shadow-sm">
-    <h6 class="border-bottom pb-2 mb-10">Class Details</h6>
+    <h6 class="border-bottom pb-2 mb-10">Class: <?= $row['class_name']; ?></h6>
       <div class="row">
         <div class="p-2 col-md-4">
           Class Name

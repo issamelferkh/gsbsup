@@ -15,7 +15,7 @@
   <?php include_once("./../includes/title.php"); ?>
 
   <div class="my-3 p-3 bg-body rounded shadow-sm">
-    <h6 class="border-bottom pb-2 mb-10">class List to Update</h6>
+    <h6 class="border-bottom pb-2 mb-10">Class List to Update</h6>
     <div class="table-wrapper">
       <!-- <table id="table_id" class="display"> -->
       <table id="table_id" class="display">
@@ -26,22 +26,21 @@
         </thead>
         <tbody>
           <?php
-$q = "SELECT * FROM `class` WHERE `student_name` = ''"; //q = query
-$q = $db->query($q);
-$q->execute();
-$c = $q->rowCount(); //c = count
-$r = $q->fetchAll(PDO::FETCH_ASSOC); // r = row
-$i = 0; // i = index
+            $q = "SELECT * FROM `class` WHERE `student_name` = ''"; //q = query
+            $q = $db->query($q);
+            $q->execute();
+            $c = $q->rowCount(); //c = count
+            $r = $q->fetchAll(PDO::FETCH_ASSOC); // r = row
+            $i = 0; // i = index
 
-while ($i < $c) {
-echo "
-  <tr>
-    <td><a href='class_update_script.php?id=".$r[$i]["id_class"]."' class='btn btn-warning'>U</a> ".$r[$i]["class_name"]."</td>
-  </tr>
-    ";
-$i++;
-}
-                          
+            while ($i < $c) {
+            echo "
+              <tr>
+                <td><a href='class_update_script.php?id=".$r[$i]["id_class"]."' class='btn btn-warning'>U</a> ".$r[$i]["class_name"]."</td>
+              </tr>
+                ";
+            $i++;
+            }
           ?>
         </tbody>
       </table>

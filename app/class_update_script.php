@@ -40,7 +40,7 @@ include_once '../config/connection.php';
   <?php include_once("./../includes/title.php"); ?>
 
   <div class="my-3 p-3 bg-body rounded shadow-sm">
-    <h6 class="border-bottom pb-2 mb-10">Update class</h6>
+    <h6 class="border-bottom pb-2 mb-10">Update Class: <?= $row['class_name']; ?></h6>
     <form method="POST">
       <input type="hidden" name="id_class" value="<?= $_GET['id']; ?>">
       <div class="row">

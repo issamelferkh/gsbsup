@@ -15,7 +15,7 @@
   <?php include_once("./../includes/title.php"); ?>
 
   <div class="my-3 p-3 bg-body rounded shadow-sm">
-    <h6 class="border-bottom pb-2 mb-10">teacher List to Update</h6>
+    <h6 class="border-bottom pb-2 mb-10">Teacher List to Update</h6>
     <div class="table-wrapper">
       <!-- <table id="table_id" class="display"> -->
       <table id="table_id" class="display">

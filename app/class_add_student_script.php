@@ -68,14 +68,13 @@ include_once '../config/connection.php';
 <main class="container">
   <?php include_once("./../includes/title.php"); ?>
   <div class="my-3 p-3 bg-body rounded shadow-sm">
-    <h6 class="border-bottom pb-2 mb-10">Add New class</h6>
-
-      <!-- Fetch class Data -->
-      <?php
-        $sql = 'SELECT * FROM `class` WHERE `id_class` like "'.$_GET['id_class'].'"';
-        $result = $db->query($sql);
-        $row = $result->fetch(PDO::FETCH_ASSOC);
-      ?>
+    <!-- Fetch class Data -->
+    <?php
+      $sql = 'SELECT * FROM `class` WHERE `id_class` like "'.$_GET['id_class'].'"';
+      $result = $db->query($sql);
+      $row = $result->fetch(PDO::FETCH_ASSOC);
+    ?>
+    <h6 class="border-bottom pb-2 mb-10">Add Students to <B><?= $row['class_name']; ?></B></h6>
       <div class="row">
         <div class="p-2 col-md-4">
           Class Name
@@ -91,11 +90,47 @@ include_once '../config/connection.php';
         </div>
       </div>
 
+      <form method="POST">
+        <div class="row">
+          <input type="hidden" name="id_class" value="<?= $_GET['id_class']; ?>" >
+          <input type="hidden" name="class_name" value="<?= $_GET['class_name']; ?>" >
+
+          <div class="p-2 col-md-4">
+            <select name="student_name" class="form-select">
+              <option selected>Add Student</option>
+              <!-- Fech Student Data to add to this Class-->
+              <?php
+                $q = "SELECT * FROM `student` WHERE `student_name` NOT IN 
+                    (SELECT `student_name` FROM `class` WHERE `class_name` LIKE '".$_GET['class_name']."')
+                  "; //q = query
+                // $q = "SELECT * FROM `student` WHERE `student_name` NOT LIKE 'a'"; //q = query
+                $q = $db->query($q);
+                $q->execute();
+                $c = $q->rowCount(); //c = count
+                $r = $q->fetchAll(PDO::FETCH_ASSOC); // r = row
+                $i = 0; // i = index
+                while ($i < $c) {
+                  echo "
+                    <option value='".$r[$i]["student_name"]."'>".$r[$i]["student_name"]."</option>
+                      ";
+                  $i++;
+                }
+              ?>
+            </select>
+          </div>
+          <div class="p-2 col-md-4">
+            <button type="submit" name="class_add" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+      </form>
+      <br>
+      <br>
+
       <!-- Fetch Student in this Class -->
       <table id="table_id" class="display">
         <thead>
           <tr>
-            <th>Student Name</th>
+            <th>Student List</th>
           </tr>
         </thead>
         <tbody>
@@ -118,40 +153,6 @@ include_once '../config/connection.php';
         ?>
         </tbody>
       </table>
-
-    <form method="POST">
-      <div class="row">
-        <input type="hidden" name="id_class" value="<?= $_GET['id_class']; ?>" >
-        <input type="hidden" name="class_name" value="<?= $_GET['class_name']; ?>" >
-
-        <div class="p-2 col-md-4">
-          <select name="student_name" class="form-select">
-            <option selected>Add Student</option>
-            <!-- Fech Student Data to add to this Class-->
-            <?php
-              $q = "SELECT * FROM `student` WHERE `student_name` NOT IN 
-                  (SELECT `student_name` FROM `class` WHERE `class_name` LIKE '".$_GET['class_name']."')
-                "; //q = query
-              // $q = "SELECT * FROM `student` WHERE `student_name` NOT LIKE 'a'"; //q = query
-              $q = $db->query($q);
-              $q->execute();
-              $c = $q->rowCount(); //c = count
-              $r = $q->fetchAll(PDO::FETCH_ASSOC); // r = row
-              $i = 0; // i = index
-              while ($i < $c) {
-                echo "
-                  <option value='".$r[$i]["student_name"]."'>".$r[$i]["student_name"]."</option>
-                    ";
-                $i++;
-              }
-            ?>
-          </select>
-        </div>
-        <div class="p-2 col-md-4">
-          <button type="submit" name="class_add" class="btn btn-primary">Submit</button>
-        </div>
-      </div>
-    </form>
   </div>
 
 </main>

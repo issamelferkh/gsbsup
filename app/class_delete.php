@@ -15,7 +15,7 @@
   <?php include_once("./../includes/title.php"); ?>
 
   <div class="my-3 p-3 bg-body rounded shadow-sm">
-    <h6 class="border-bottom pb-2 mb-10">class List to Delete</h6>
+    <h6 class="border-bottom pb-2 mb-10">Class List to Delete</h6>
     <div class="table-wrapper">
       <!-- <table id="table_id" class="display"> -->
       <table id="table_id" class="display">
