@@ -53,7 +53,8 @@ gsbsup
 
 ## Presence
 ## Payement
-
+- [x] add Student Payement
+- [x] Check Student Payement
 ## Needed
 - Imtach bdat GSB
 - 
