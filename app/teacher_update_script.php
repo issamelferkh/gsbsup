@@ -3,8 +3,17 @@
 include_once '../config/connection.php';
 
   if(isset($_POST["teacher_update"])) {
+    $old_name = $_POST['old_name'];
     $teacher_name = $_POST['teacher_name'];
     $id_teacher = $_POST['id_teacher'];
+
+    $query = "UPDATE `payement_teacher` SET `teacher_name`=? WHERE `teacher_name`=?"; 
+    $query = $db->prepare($query);
+    $query->execute([$teacher_name,$old_name]);
+
+    $query = "UPDATE `class` SET `teacher_name`=? WHERE `teacher_name`=?"; 
+    $query = $db->prepare($query);
+    $query->execute([$teacher_name,$old_name]);
 
     $query = "UPDATE `teacher` SET `teacher_name`=? WHERE `id_teacher`=?"; 
     $query = $db->prepare($query);
@@ -43,6 +52,7 @@ include_once '../config/connection.php';
     <h6 class="border-bottom pb-2 mb-10">Update Teacher: <?= $row['teacher_name']; ?></h6>
     <form method="POST">
       <input type="hidden" name="id_teacher" value="<?= $_GET['id']; ?>">
+      <input type="hidden" name="old_name" value="<?= $_GET['old_name']; ?>">
       <div class="row">
         <div class="p-2 col-md-12">
           <input type="text" name="teacher_name" class="form-control"  value="<?php if (isset($row['teacher_name'])) echo $row['teacher_name']; ?>" placeholder="teacher Full Name">

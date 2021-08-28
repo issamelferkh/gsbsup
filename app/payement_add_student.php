@@ -81,7 +81,9 @@ include_once '../config/connection.php';
             <tr>
               <th>Stdent Name</th>
               <th>Class Name</th>
-              <th>Teacher Name</th>
+              <!-- <th>Teacher Name</th>
+              <td>".$r[$i]["teacher_name"]."</td> -->
+
             </tr>
           </thead>
           <tbody>
@@ -98,7 +100,6 @@ include_once '../config/connection.php';
                   <tr>
                     <td><input type='radio' class='form-check-input' name='student_class' value='".$r[$i]["student_name"].",".$r[$i]["class_name"].",".$r[$i]["teacher_name"]."'> ".$r[$i]["student_name"]."</td>
                     <td>".$r[$i]["class_name"]."</td>
-                    <td>".$r[$i]["teacher_name"]."</td>
                   </tr>
                     ";
                 $i++;

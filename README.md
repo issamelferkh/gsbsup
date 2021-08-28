@@ -6,11 +6,11 @@ gsbsup
 - [x] In "Add Teacher Payment" create new input "Payment Date"
 - [x] When Update Class: update Teacher Name and Subject Name also
 
-- When Update Student Name, it's not updated in payement page (payement journal)
-- When Update Teacher Name, it's not updated in payement page (payement journal)
+- [x] When Update Student Name, it's not updated in payement page (payement journal)
+- [x] When Update Teacher Name, it's not updated in payement page (payement journal)
 - When Update Class Name, it's not updated in payement page (payement journal)
 
-			- Compte User
+- Compte User: desribe all the fonctionalities
 
 
 - [ ] not add 2 students with the same name

@@ -21,7 +21,7 @@
       <table id="table_id" class="display">
         <thead>
           <tr>
-            <th>Stdent Name</th>
+            <th>Teacher Name</th>
           </tr>
         </thead>
         <tbody>
@@ -36,7 +36,7 @@ $i = 0; // i = index
 while ($i < $c) {
 echo "
   <tr>
-    <td><a href='teacher_update_script.php?id=".$r[$i]["id_teacher"]."' class='btn btn-warning'>U</a> ".$r[$i]["teacher_name"]."</td>
+    <td><a href='teacher_update_script.php?id=".$r[$i]["id_teacher"]."&old_name=".$r[$i]["teacher_name"]."' class='btn btn-warning'>U</a> ".$r[$i]["teacher_name"]."</td>
   </tr>
     ";
 $i++;

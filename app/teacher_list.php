@@ -21,7 +21,7 @@
       <table id="table_id" class="display">
         <thead>
           <tr>
-            <th>Stdent Name</th>
+            <th>Teacher Name</th>
           </tr>
         </thead>
         <tbody>
