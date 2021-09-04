@@ -2,7 +2,17 @@
 gsbsup
 
 ## Todo
-- [ ] Devis
+- Add new class:
+  - teacher + subject => recured +
+  - not add 2 class with the same name
+- check student payement
+  - check student payement script:  not working !!!
+- Add teacher payement
+  - not show all teachers
+
+
+
+- [x] Devis
 - [x] Add student to class avoid "Add Student"
 - [x] Datatables
 - [x] dashboards
