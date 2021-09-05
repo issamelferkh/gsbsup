@@ -48,12 +48,13 @@ include_once '../config/connection.php';
       <div class="row">
 
         <div class="p-2 col-md-4">
-          <input type="text" name="class_name" class="form-control" placeholder="Class Name">
+          Class Name
+          <input type="text" name="class_name" class="form-control" placeholder="Class Name" required>
         </div>
 
         <div class="p-2 col-md-4">
-          <select name="teacher_name" class="form-select">
-            <option selected>Add Teacher</option>
+          Select a Teacher
+          <select name="teacher_name" class="form-select" required>
             <!-- Fech Teacher Data -->
             <?php
               $q = "SELECT * FROM `teacher`"; //q = query
@@ -73,7 +74,8 @@ include_once '../config/connection.php';
         </div>
 
         <div class="p-2 col-md-4">
-          <input type="text" name="subject_name" class="form-control" placeholder="Subject Name">
+          Subject Name
+          <input type="text" name="subject_name" class="form-control" placeholder="Subject Name" required>
         </div>
 
       </div>

@@ -39,7 +39,7 @@
               while ($i < $c) {
                 echo "
                   <tr>
-                    <td><input type='radio' class='form-check-input' name='student_class' value='".$r[$i]["student_name"].", ".$r[$i]["class_name"]."'> ".$r[$i]["student_name"]."</td>
+                    <td><input type='radio' class='form-check-input' name='student_class' value='".$r[$i]["student_name"].",".$r[$i]["class_name"]."'> ".$r[$i]["student_name"]."</td>
                     <td>".$r[$i]["class_name"]."</td>
                   </tr>
                     ";

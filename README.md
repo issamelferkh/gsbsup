@@ -2,13 +2,14 @@
 gsbsup
 
 ## Todo
+- [ ] not add 2 students with the same name
 - Add new class:
-  - teacher + subject => recured +
-  - not add 2 class with the same name
+  - [x] teacher + subject => recured +
+  - [ ] not add 2 class with the same name
 - check student payement
-  - check student payement script:  not working !!!
+  - [x] check student payement script:  not working !!!
 - Add teacher payement
-  - not show all teachers
+  - [x] not show all teachers
 
 
 
