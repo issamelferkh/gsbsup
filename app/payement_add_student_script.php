@@ -9,61 +9,62 @@
 	} );
 </script>
 
-
 <?php
-// INSERT INTO `payement`(`id_payement`, `id_class`, `id_teacher`, ``, `pay_month`, `pay_date`, `pay_amount`, `remarque`, `create_at`) 
-if(isset($_POST["payement_add_student2"])) {
-    print_r($_POST);
-  if( empty($_POST["student"]) ) {
-    $msg = 'All fields are required !';	
+  // Recover Student Data
+  if(isset($_GET["id_student"]) && isset($_GET["student_name"])) {
+    $id_student = $_GET["id_student"];
+    $student_name = $_GET["student_name"];
   } else {
-    // print_r($_POST);
-
-    $student = explode(",", $_POST['student']);
-    $id_student = $student[0];
-    $student_name = $student[1];
-
-    $class_name = $student_class[1];
-    $teacher_name = $student_class[2];
-
-  //   $pay_date = $_POST['pay_date'];
-  //   $pay_month = $_POST['pay_month'];
-  //   $pay_amount = $_POST['pay_amount'];
-  //   $pay_amount_teacher = 70;
-
-  //   // Add to Payment Teacher
-  //   $student_name = $student_class[0];
-  //   $remarque = "<B>".$student_name."</B> from <B>".$class_name."</B> class 
-  //             paid GSB School <B>".$pay_amount." Dhs</B> of which <B>".$pay_amount_teacher." Dhs</B> for the Teacher <B>".$teacher_name."</B> 
-  //             for the month <B>".$pay_month."</B>";
-
-  //   $query = 'INSERT INTO `payement_teacher` (`teacher_name`,`class_name`,`pay_amount`,`pay_month`,`remarque`,`pay_date`) 
-  //   VALUES (?,?,?,?,?,?)';
-  //   $query = $db->prepare($query);
-  //   $query->execute([$teacher_name,$class_name,$pay_amount_teacher,$pay_month,$remarque,$pay_date]);
-
-
-  //   $query = 'INSERT INTO `payement` (`student_name`,`class_name`,`pay_month`,`pay_amount`,`pay_date`) 
-  //   VALUES (?,?,?,?,?)';
-  //     $query = $db->prepare($query);
-  //     if ($query->execute([$student_name,$class_name,$pay_month,$pay_amount,$pay_date])) {
-  //       echo "
-  //         <script>
-  //           const msg = 'Done.';
-  //           window.location.href='payement_add_student.php?msg='+msg;
-  //         </script>
-  //         ";
-  //     } else {
-  //       echo "
-  //         <script>
-  //           const msg = 'Sorry, something went wrong!';
-  //           window.location.href='payement_add_student.php?msg='+msg;
-  //         </script>
-  //         ";
-  //     }
+    $id_student = "";
+    $student_name = "";
   }
 
-}
+  // Recover Class and Teacher and Payment Data to insert to DB
+  if(isset($_POST["payement_add_student"])) {
+    $class_teacher_data = explode(",", $_POST['class_teacher_data']);
+
+    $id_class = $class_teacher_data[0];
+    $class_name = $class_teacher_data[1];
+    $id_teacher = $class_teacher_data[2];
+    $teacher_name = $class_teacher_data[3];
+    $id_student = $_POST["id_student"];
+    $student_name = $_POST["student_name"];
+
+    $pay_date = $_POST['pay_date'];
+    $pay_month = $_POST['pay_month'];
+    $pay_amount = $_POST['pay_amount'];
+    $pay_amount_teacher = 70;
+
+    $remarque = "<B>".$student_name."</B> from <B>".$class_name."</B> class 
+                  paid GSB School <B>".$pay_amount." Dhs</B> of which <B>".$pay_amount_teacher." Dhs</B> for the Teacher <B>".$teacher_name."</B> 
+                  for the month <B>".$pay_month."</B>";
+
+    // Add to Payment to Teacher
+    $query = 'INSERT INTO `payement_teacher` (`id_student`, `id_class`, `id_teacher`,`pay_amount`,`pay_month`,`remarque`,`pay_date`) 
+    VALUES (?,?,?,?,?,?,?)';
+    $query = $db->prepare($query);
+    $query->execute([$id_student, $id_class, $id_teacher,$pay_amount_teacher,$pay_month,$remarque,$pay_date]);
+
+    // Add to Payment to Student
+    $query = 'INSERT INTO `payement` (`id_student`, `id_class`, `id_teacher`, `pay_month`,`pay_amount`,`pay_date`) 
+    VALUES (?,?,?,?,?,?)';
+    $query = $db->prepare($query);
+    if ($query->execute([$id_student, $id_class, $id_teacher ,$pay_month,$pay_amount,$pay_date])) {
+      echo "
+        <script>
+          const msg = 'Done.';
+          window.location.href='payement_add_student.php?msg='+msg;
+        </script>
+        ";
+    } else {
+      echo "
+        <script>
+          const msg = 'Sorry, something went wrong!';
+          window.location.href='payement_add_student.php?msg='+msg;
+        </script>
+        ";
+    }
+  }
 ?>
 
 
@@ -80,28 +81,28 @@ if(isset($_POST["payement_add_student2"])) {
       <div class="row">
         <div class="p-2 col-md-3">
           Select Class<br>
-            <select name="class" class="form-select">
+            <select name="class_teacher_data" class="form-select">
               <?php
-                $q = "SELECT * FROM `class`"; //q = query
-                $q = $db->query($q);
-                $q->execute();
-                $c = $q->rowCount(); //c = count
-                $r = $q->fetchAll(PDO::FETCH_ASSOC); // r = row
-                $i = 0; // i = index
-                while ($i < $c) {
-                  $query = 'SELECT * FROM `student_has_class` WHERE `id_student` = "'.$id_student.'" AND `id_class` = "'.$r[$i]["id_class"].'"';
-                  $query = $db->prepare($query);
-                  $query->execute();
-                  $count = $query->rowCount();
-                  $row = $query->fetchAll(\PDO::FETCH_ASSOC);
-                  if ($count > 0) {
-                    echo "<option value='".$r[$i]["id_class"].",".$r[$i]["class_name"]."'>".$r[$i]["class_name"]."</option>";
-                  } else {
-                    echo "<option value='Emplty' >This student not assigned to any class</option>";
-
+                $query =' SELECT `student_has_class`.`id_student`, `student_has_class`.`id_class`, `teacher`.`id_teacher`, 
+                                  `class`.`class_name`, `teacher`.`teacher_name`
+                          FROM `student_has_class`
+                          INNER JOIN `class` ON `class`.`id_class` = `student_has_class`.`id_class`
+                          INNER JOIN `teacher` ON `teacher`.`id_teacher` = `class`.`id_teacher`
+                          WHERE `id_student` = "'.$id_student.'"
+                ';
+                $query = $db->prepare($query);
+                $query->execute();
+                $c = $query->rowCount();
+                $row = $query->fetchAll(PDO::FETCH_ASSOC);
+                $i = 0; 
+                if ($c > 0) {
+                  while ($i < $c) {
+                    echo "<option value='".$row[$i]["id_class"].",".$row[$i]["class_name"].",".$row[$i]["id_teacher"].",".$row[$i]["teacher_name"]."'>".$row[$i]["class_name"]."</option>";
+                    $i++;
                   }
+                } else {
+                  echo "<option value='Emplty' >This student not assigned to any class</option>";
 
-                  $i++;
                 }
               ?>
             </select>
@@ -122,7 +123,7 @@ if(isset($_POST["payement_add_student2"])) {
           <input type="text" name="pay_amount" class="form-control" placeholder="Amount on Dhs" required >
         </div>
       </div>
-      <button type="submit" name="payement_add_student2" class="btn btn-primary">Submit</button>
+      <button type="submit" name="payement_add_student" class="btn btn-primary">Submit</button>
     </form>
   </div>
 </main>

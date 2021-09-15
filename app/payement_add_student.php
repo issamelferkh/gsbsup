@@ -61,7 +61,7 @@
 
   <div class="my-3 p-3 bg-body rounded shadow-sm">
     <h6 class="border-bottom pb-2 mb-10">Add New Student Payement</h6>
-    <form method="POST" action="payement_add_student_script.php?student=sss">
+    <!-- <form method="POST" action=".php?student=sss"> -->
       <!-- Student Table -->
       <div class="table-wrapper">
         <table id="table_id" class="display">
@@ -70,8 +70,6 @@
               <th>Student Name</th>
             </tr>
           </thead>
-          <!-- <td><input type='radio' class='form-check-input' name='student_class' value='".$r[$i]["student_name"].",".$r[$i]["class_name"].",".$r[$i]["teacher_name"]."'> ".$r[$i]["student_name"]."</td> -->
-
           <tbody>
             <?php
               $query = "SELECT * FROM `student`"; //q = query
@@ -84,7 +82,7 @@
               while ($i < $count) {
                 echo "
                   <tr>
-                    <td><input type='radio' class='form-check-input' name='student' value='".$row[$i]["id_student"].",".$row[$i]["student_name"]."'> ".$row[$i]["student_name"]."</td>
+                    <td><a href='payement_add_student_script.php?id_student=".$row[$i]["id_student"]."&student_name=".$row[$i]["student_name"]."' class='btn btn-primary'>A</a> ".$row[$i]["student_name"]."</td>
                   </tr>
                     ";
                 $i++;
@@ -93,8 +91,8 @@
           </tbody>
         </table>
       </div>
-      <button type="submit" name="payement_add_student1" class="btn btn-primary">Submit</button>
-    </form>
+      <!-- <button type="submit" name="payement_add_student1" class="btn btn-primary">Submit</button>
+    </form> -->
   </div>
 </main>
 

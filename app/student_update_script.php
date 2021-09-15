@@ -3,17 +3,16 @@
 include_once '../config/connection.php';
 
   if(isset($_POST["student_update"])) {
-    $old_name = $_POST['old_name'];
-    $student_name = $_POST['student_name'];
     $id_student = $_POST['id_student'];
+    $student_name = $_POST['student_name'];
 
-    $query = "UPDATE `payement` SET `student_name`=? WHERE `student_name`=?"; 
-    $query = $db->prepare($query);
-    $query->execute([$student_name,$old_name]);
+    // $query = "UPDATE `payement` SET `student_name`=? WHERE `student_name`=?"; 
+    // $query = $db->prepare($query);
+    // $query->execute([$student_name,$old_name]);
 
-    $query = "UPDATE `class` SET `student_name`=? WHERE `student_name`=?"; 
-    $query = $db->prepare($query);
-    $query->execute([$student_name,$old_name]);
+    // $query = "UPDATE `class` SET `student_name`=? WHERE `student_name`=?"; 
+    // $query = $db->prepare($query);
+    // $query->execute([$student_name,$old_name]);
 
     $query = "UPDATE `student` SET `student_name`=? WHERE `id_student`=?"; 
     $query = $db->prepare($query);

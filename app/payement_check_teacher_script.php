@@ -1,4 +1,5 @@
 <?php include_once("./../includes/header.php"); ?>
+<?php include_once '../config/connection.php'; ?>
 
 <script>
 	$(document).ready( function () {
@@ -8,19 +9,15 @@
 	} );
 </script>
 
-
 <?php
-include_once '../config/connection.php';
-
   if(isset($_GET["teacher_name"])) {
+    $id_teacher = $_GET["id_teacher"];
     $teacher_name = $_GET["teacher_name"];
   } else {
+    $id_teacher = "";
     $teacher_name = "";
   }
-
 ?>
-
-
 
 <?php include_once("./../includes/navbar.php"); ?>
 <?php include_once("./../includes/nav_scroller_payement.php"); ?>
@@ -43,7 +40,7 @@ include_once '../config/connection.php';
           </thead>
           <tbody>
             <?php
-              $q = "SELECT * FROM `payement_teacher` WHERE `teacher_name` = '".$teacher_name."'"; //q = query
+              $q = "SELECT * FROM `payement_teacher` WHERE `id_teacher` = '".$id_teacher."'"; //q = query
               $q = $db->query($q);
               $q->execute();
               $c = $q->rowCount(); //c = count

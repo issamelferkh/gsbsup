@@ -3,6 +3,11 @@ gsbsup
 
 ## Todo
 - Delete Student from Class
+- Check duplicate Student in Add
+- Check duplicate Class in Add
+- Check duplicate Teacher in Add
+- Compte User: desribe all the fonctionalities
+
 
 
 - [x] In "Add Student Payment" create new Input "Payment Date"
@@ -15,7 +20,6 @@ gsbsup
 - [x] When Update Teacher Name, it's not updated in payement page (payement journal)
 - When Update Class Name, it's not updated in payement page (payement journal)
 
-- Compte User: desribe all the fonctionalities
 
 
 - [ ] not add 2 students with the same name

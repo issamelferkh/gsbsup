@@ -3,14 +3,15 @@
 include_once '../config/connection.php';
 
   if(isset($_POST["class_update"])) {
+    // print_r($_POST);
     $class_name = $_POST['class_name'];
-    $teacher_name = $_POST['teacher_name'];
+    $id_teacher = $_POST['id_teacher'];
     $subject_name = $_POST['subject_name'];
     $id_class = $_POST['id_class'];
 
-    $query = "UPDATE `class` SET `class_name`=?,`teacher_name`=?,`subject_name`=? WHERE `id_class`=?"; 
+    $query = "UPDATE `class` SET `class_name`=?,`id_teacher`=?,`subject_name`=? WHERE `id_class`=?"; 
     $query = $db->prepare($query);
-    if ($query->execute([$class_name,$teacher_name,$subject_name,$id_class])) {
+    if ($query->execute([$class_name,$id_teacher,$subject_name,$id_class])) {
       echo "
         <script>
           const msg = 'Done.';
@@ -53,8 +54,7 @@ include_once '../config/connection.php';
 
         <div class="p-2 col-md-4">
           Select a Teacher
-          <select name="teacher_name" class="form-select" required>
-            <!-- <option value="<?= $row['teacher_name']; ?>"><?= $row['teacher_name']; ?></option> -->
+          <select name="id_teacher" class="form-select" required>
             <!-- Fech Teacher Data -->
             <?php
               $q = "SELECT * FROM `teacher`"; //q = query
@@ -65,7 +65,7 @@ include_once '../config/connection.php';
               $i = 0; // i = index
               while ($i < $c) {
                 echo "
-                  <option value='".$r[$i]["teacher_name"]."'>".$r[$i]["teacher_name"]."</option>
+                  <option value='".$r[$i]["id_teacher"]."'>".$r[$i]["teacher_name"]."</option>
                     ";
                 $i++;
               }

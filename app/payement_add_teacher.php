@@ -59,30 +59,27 @@ include_once '../config/connection.php';
 
   <div class="my-3 p-3 bg-body rounded shadow-sm">
     <h6 class="border-bottom pb-2 mb-10">Add New teacher Payement</h6>
-    <form method="POST">
       <!-- teacher Table -->
       <div class="table-wrapper">
         <table id="table_id" class="display">
           <thead>
             <tr>
               <th>Teacher Name</th>
-              <th>Class Name</th>
             </tr>
           </thead>
           <tbody>
             <?php
-              $q = "SELECT * FROM `class` WHERE `student_name` = '' "; //q = query
+              $q = "SELECT * FROM `teacher`"; //q = query
               $q = $db->query($q);
               $q->execute();
               $c = $q->rowCount(); //c = count
-              $r = $q->fetchAll(PDO::FETCH_ASSOC); // r = row
+              $row = $q->fetchAll(PDO::FETCH_ASSOC); // r = row
               $i = 0; // i = index
 
               while ($i < $c) {
                 echo "
                   <tr>
-                    <td><input type='radio' class='form-check-input' name='teacher_class' value='".$r[$i]["teacher_name"].",".$r[$i]["class_name"]."'> ".$r[$i]["teacher_name"]."</td>
-                    <td>".$r[$i]["class_name"]."</td>
+                    <td><a href='payement_add_teacher_script.php?id_teacher=".$row[$i]["id_teacher"]."&teacher_name=".$row[$i]["teacher_name"]."' class='btn btn-primary'>A</a> ".$row[$i]["teacher_name"]."</td>
                   </tr>
                     ";
                 $i++;
@@ -92,23 +89,6 @@ include_once '../config/connection.php';
           </tbody>
         </table>
       </div>
-      <!-- Other Inputs -->
-      <div class="row">
-        <div class="p-2 col-md-4">
-          Payment Date
-          <input type="date" name="pay_date" class="form-control" placeholder="Payment Date" required >
-        </div>
-        <div class="p-2 col-md-4">
-          Month
-          <input type="month" name="pay_month" class="form-control" placeholder="Class Name" required >
-        </div>
-        <div class="p-2 col-md-4">
-          Amount
-          <input type="text" name="pay_amount" class="form-control" placeholder="Amount on Dhs" required >
-        </div>
-      </div>
-      <button type="submit" name="payement_add_teacher" class="btn btn-primary">Submit</button>
-    </form>
   </div>
 </main>
 

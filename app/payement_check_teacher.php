@@ -17,7 +17,6 @@
 
   <div class="my-3 p-3 bg-body rounded shadow-sm">
     <h6 class="border-bottom pb-2 mb-10">Check Teacher Payement</h6>
-    <form method="POST" action="payement_check_student_script.php">
       <!-- Student Table -->
       <div class="table-wrapper">
         <table id="table_id" class="display">
@@ -39,7 +38,7 @@
               while ($i < $c) {
                 $total = 0;
 
-                $q2 = 'SELECT * FROM `payement_teacher` WHERE `teacher_name`="'.$r[$i]['teacher_name'].'"';
+                $q2 = 'SELECT * FROM `payement_teacher` WHERE `id_teacher`="'.$r[$i]['id_teacher'].'"';
                 $q2 = $db->query($q2);
                 $q2->execute();
                 $c2 = $q2->rowCount(); //c = count
@@ -53,17 +52,36 @@
 
                 echo "
                   <tr>
-                    <td><a href='payement_check_teacher_script.php?teacher_name=".$r[$i]["teacher_name"]."' class='btn btn-success'>M</a> ".$r[$i]["teacher_name"]."</td>
-                    <td><a href='payement_check_teacher_script.php?teacher_name=".$r[$i]["teacher_name"]."'>".$total." </a></td>
+                    <td><a href='payement_check_teacher_script.php?id_teacher=".$r[$i]["id_teacher"]."&teacher_name=".$r[$i]["teacher_name"]."' class='btn btn-success'>C</a> ".$r[$i]["teacher_name"]."</td>
+                    <td>".$total." Dhs</td>
                   </tr>
                     ";
                 $i++;
               }
             ?>
           </tbody>
+
+          <tbody>
+            <?php
+              $query = "SELECT * FROM `teacher`"; //q = query
+              $query = $db->query($query);
+              $query->execute();
+              $count = $query->rowCount(); //c = count
+              $row = $query->fetchAll(PDO::FETCH_ASSOC); // r = row
+              $i = 0; // i = index
+
+              while ($i < $count) {
+                echo "
+                  <tr>
+                  </tr>
+                    ";
+                $i++;
+              }
+            ?>
+          </tbody>
+
         </table>
       </div>
-    </form>
   </div>
 </main>
 
