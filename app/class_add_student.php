@@ -36,10 +36,14 @@
             $i = 0; // i = index
 
             while ($i < $c) {
+              $query2 = 'SELECT * FROM `teacher` WHERE `id_teacher` = "'.$r[$i]["id_teacher"].'"';
+              $result2 = $db->query($query2);
+              $row2 = $result2->fetch(PDO::FETCH_ASSOC);
+
               echo "
                 <tr>
-                  <td><a href='class_add_student_script.php?id_class=".$r[$i]["id_class"]."&class_name=".$r[$i]["class_name"]."' class='btn btn-primary'>A</a> ".$r[$i]["class_name"]."</td>
-                  <td>".$r[$i]["teacher_name"]."</td>
+                  <td><a href='class_add_student_script.php?id_class=".$r[$i]["id_class"]."&id_teacher=".$r[$i]["id_teacher"]."' class='btn btn-primary'>A</a> ".$r[$i]["class_name"]."</td>
+                  <td>".$row2["teacher_name"]."</td>
                   <td>".$r[$i]["subject_name"]."</td>
                 </tr>
                   ";

@@ -44,6 +44,7 @@ include_once '../config/connection.php';
         <table id="table_id" class="display">
           <thead>
             <tr>
+              <th>Payment Date</th>
               <th>Month</th>
               <th>Amount</th>
             </tr>
@@ -60,6 +61,7 @@ include_once '../config/connection.php';
               while ($i < $c) {
                 echo "
                   <tr>
+                    <td>".$r[$i]["pay_date"]."</td>
                     <td>".$r[$i]["pay_month"]."</td>
                     <td>".$r[$i]["pay_amount"]." Dhs</td>
                   </tr>

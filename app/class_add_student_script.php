@@ -11,52 +11,45 @@
 include_once '../config/connection.php';
 
   if(isset($_POST["class_add"])) {
-    // class_add_student_script.php?id_class=32&class_name=classtest
-    if( empty($_POST["student_name"]) ) {
+    if( empty($_POST["id_student"]) ) {
       $msg = 'All fields are required !';	
     } else {
       $id_class = $_POST['id_class'];
-      $class_name = $_POST['class_name'];
-      $student_name = $_POST['student_name'];
-      $teacher_name = $_POST['teacher_name'];
+      $id_teacher = $_POST['id_teacher'];
+      $id_student = $_POST['id_student'];
 
-      $query = 'INSERT INTO `class` (`class_name`,`student_name`,`teacher_name`) 
-      VALUES (?,?,?)';
-      $query = $db->prepare($query);
-      if ($query->execute([$class_name,$student_name,$teacher_name])) {
-        echo "
-          <script>
-            const msg = 'Done.';
-            window.location.href='class_add_student_script.php?msg='+msg&id_class=".$id_class.";
-          </script>
-          ";
+    // Check if already this Student exist in this Class
+      $query5 = 'SELECT * FROM `student_has_class` WHERE `id_class`="'.$id_class.'" AND `id_student`="'.$id_student.'"';
+      $query5 = $db->prepare($query5);
+      $query5->execute();
+      $count5 = $query5->rowCount();
+      $row5 = $query5->fetchAll(\PDO::FETCH_ASSOC);
+
+      if ($count5 > 0) {
+        echo "This Student already in this class";
       } else {
-        echo "
-          <script>
-            const msg = 'Sorry, something went wrong!';
-            window.location.href='class_add_student.php?msg='+msg;
-          </script>
-          ";
+        // Add this Student to this Class
+        $query = 'INSERT INTO `student_has_class` (`id_class`,`id_teacher`,`id_student`) 
+        VALUES (?,?,?)';
+        $query = $db->prepare($query);
+        if ($query->execute([$id_class,$id_teacher,$id_student])) {
+          echo "
+            <script>
+              const msg = 'Done.';
+              window.location.href='class_add_student_script.php?msg='+msg&id_class=".$id_class.";
+            </script>
+            ";
+        } else {
+          echo "
+            <script>
+              const msg = 'Sorry, something went wrong!';
+              window.location.href='class_add_student.php?msg='+msg;
+            </script>
+            ";
+        }
       }
 
 
-      // $query = "UPDATE `student` SET `id_class`=?,`class_name`=? WHERE `student_name`=?"; 
-      // $query = $db->prepare($query);
-      // if ($query->execute([$id_class,$class_name,$student_name])) {
-      //   echo "
-      //     <script>
-      //       const msg = 'Done.';
-      //       window.location.href='class_add_student.php?msg='+msg;
-      //     </script>
-      //     ";
-      // } else {
-      //   echo "
-      //     <script>
-      //       const msg = 'Sorry, something went wrong!';
-      //       window.location.href='class_add_student.php?msg='+msg;
-      //     </script>
-      //     ";
-      // }
     }
 	}
 ?>
@@ -74,6 +67,11 @@ include_once '../config/connection.php';
       $sql = 'SELECT * FROM `class` WHERE `id_class` like "'.$_GET['id_class'].'"';
       $result = $db->query($sql);
       $row = $result->fetch(PDO::FETCH_ASSOC);
+
+      $query2 = 'SELECT * FROM `teacher` WHERE `id_teacher` = "'.$row["id_teacher"].'"';
+      $result2 = $db->query($query2);
+      $row2 = $result2->fetch(PDO::FETCH_ASSOC);
+
     ?>
     <h6 class="border-bottom pb-2 mb-10">Add Students to <B><?= $row['class_name']; ?></B></h6>
       <div class="row">
@@ -83,7 +81,7 @@ include_once '../config/connection.php';
         </div>
         <div class="p-2 col-md-4">
           Teacher Name
-          <input type="text" class="form-control"  value="<?php if (isset($row['teacher_name'])) echo $row['teacher_name']; ?>" disabled>
+          <input type="text" class="form-control"  value="<?php if (isset($row2['teacher_name'])) echo $row2['teacher_name']; ?>" disabled>
         </div>
         <div class="p-2 col-md-4">
           Subject Name
@@ -94,18 +92,14 @@ include_once '../config/connection.php';
       <form method="POST">
         <div class="row">
           <input type="hidden" name="id_class" value="<?= $_GET['id_class']; ?>" >
-          <input type="hidden" name="class_name" value="<?= $_GET['class_name']; ?>" >
-          <input type="hidden" name="teacher_name" value="<?= $row['teacher_name']; ?>" >
+          <input type="hidden" name="id_teacher" value="<?= $_GET['id_teacher']; ?>" >
 
           <div class="p-2 col-md-12">
           Select Student<br>
-            <select name="student_name" class="form-select">
+            <select name="id_student" class="form-select">
               <!-- Fech Student Data to add to this Class-->
               <?php
-                $q = "SELECT * FROM `student` WHERE `student_name` NOT IN 
-                    (SELECT `student_name` FROM `class` WHERE `class_name` LIKE '".$_GET['class_name']."')
-                  "; //q = query
-                // $q = "SELECT * FROM `student` WHERE `student_name` NOT LIKE 'a'"; //q = query
+                $q = "SELECT * FROM `student`"; //q = query
                 $q = $db->query($q);
                 $q->execute();
                 $c = $q->rowCount(); //c = count
@@ -113,7 +107,7 @@ include_once '../config/connection.php';
                 $i = 0; // i = index
                 while ($i < $c) {
                   echo "
-                    <option value='".$r[$i]["student_name"]."'>".$r[$i]["student_name"]."</option>
+                    <option value='".$r[$i]["id_student"]."'>".$r[$i]["student_name"]."</option>
                       ";
                   $i++;
                 }
@@ -137,20 +131,26 @@ include_once '../config/connection.php';
         </thead>
         <tbody>
         <?php
-          $class_name = $row['class_name'];
-          $sql = "SELECT * FROM `class` WHERE `student_name` > '' AND `class_name` = '".$class_name."' ";
-          $sql = $db->query($sql);
-          $sql->execute();
-          $count = $sql->rowCount(); //c = count
-          $row = $sql->fetchAll(PDO::FETCH_ASSOC);
-          $i = 0;
-          while($i < $count) {
+          $id_class = $row['id_class'];
+
+          $query3 = "SELECT * FROM `student_has_class` WHERE `id_class` = '".$id_class."' ";
+          $query3 = $db->query($query3);
+          $query3->execute();
+          $count3 = $query3->rowCount(); //c = count
+          $row3 = $query3->fetchAll(PDO::FETCH_ASSOC);
+          $i3 = 0;
+          while($i3 < $count3) {
+            $query4 = 'SELECT * FROM `student` WHERE `id_student` = "'.$row3[$i3]["id_student"].'"';
+            $result4 = $db->query($query4);
+            $row4 = $result4->fetch(PDO::FETCH_ASSOC);
+
+
             echo "
               <tr>
-                <td>".$row[$i]["student_name"]."</td>
+                <td>".$row4["student_name"]."</td>
               </tr>
                 ";
-            $i++;
+            $i3++;
           }
         ?>
         </tbody>

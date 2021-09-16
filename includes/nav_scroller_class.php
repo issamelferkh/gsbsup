@@ -4,6 +4,6 @@
     <a class="nav-link" href="../app/class_add.php">Add New Class</a>
     <a class="nav-link" href="../app/class_update.php">Update</a>
     <a class="nav-link" href="../app/class_delete.php">Delete</a>
-    <a class="nav-link" href="../app/class_add_student.php">Add Student to a Class</a>
+    <a class="nav-link" href="../app/class_add_student.php">Management of Class Students</a>
   </nav>
 </div>

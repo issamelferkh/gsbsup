@@ -9,6 +9,10 @@
   $sql = 'SELECT * FROM `class` WHERE `id_class` like "'.$_GET['id'].'"';
   $result = $db->query($sql);
   $row = $result->fetch(PDO::FETCH_ASSOC);
+
+  $query2 = 'SELECT * FROM `teacher` WHERE `id_teacher` like "'.$row['id_teacher'].'"';
+  $result2 = $db->query($query2);
+  $row2 = $result2->fetch(PDO::FETCH_ASSOC);
 ?>
 
 <main class="container">
@@ -23,7 +27,7 @@
         </div>
         <div class="p-2 col-md-4">
           Teacher Name
-          <input type="text" class="form-control"  value="<?php if (isset($row['teacher_name'])) echo $row['teacher_name']; ?>" disabled>
+          <input type="text" class="form-control"  value="<?php if (isset($row2['teacher_name'])) echo $row2['teacher_name']; ?>" disabled>
         </div>
         <div class="p-2 col-md-4">
           Subject Name

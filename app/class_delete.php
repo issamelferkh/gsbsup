@@ -36,10 +36,14 @@ $r = $q->fetchAll(PDO::FETCH_ASSOC); // r = row
 $i = 0; // i = index
 
 while ($i < $c) {
+  $query2 = 'SELECT * FROM `teacher` WHERE `id_teacher` = "'.$r[$i]["id_teacher"].'"';
+  $result2 = $db->query($query2);
+  $row2 = $result2->fetch(PDO::FETCH_ASSOC);
+
 echo "
   <tr>
     <td><a href='class_delete_script.php?id=".$r[$i]["id_class"]."' onclick='return myConfirm();' class='btn btn-danger'>X</a> ".$r[$i]["class_name"]."</td>
-    <td>".$r[$i]["teacher_name"]."</td>
+    <td>".$row2["teacher_name"]."</td>
     <td>".$r[$i]["subject_name"]."</td>
   </tr>
     ";

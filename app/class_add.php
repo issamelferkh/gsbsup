@@ -7,13 +7,13 @@ include_once '../config/connection.php';
       $msg = 'All fields are required !';	
     } else {
       $class_name = $_POST['class_name'];
-      $teacher_name = $_POST['teacher_name'];
+      $id_teacher = $_POST['id_teacher'];
       $subject_name = $_POST['subject_name'];
 
-      $query = 'INSERT INTO `class` (`class_name`,`teacher_name`,`subject_name`) 
+      $query = 'INSERT INTO `class` (`class_name`,`id_teacher`,`subject_name`) 
       VALUES (?,?,?)';
         $query = $db->prepare($query);
-        if ($query->execute([$class_name,$teacher_name,$subject_name])) {
+        if ($query->execute([$class_name,$id_teacher,$subject_name])) {
           echo "
             <script>
               const msg = 'Done.';
@@ -52,7 +52,7 @@ include_once '../config/connection.php';
 
         <div class="p-2 col-md-4">
           Select a Teacher
-          <select name="teacher_name" class="form-select" required>
+          <select name="id_teacher" class="form-select" required>
             <!-- Fech Teacher Data -->
             <?php
               $q = "SELECT * FROM `teacher`"; //q = query
@@ -63,7 +63,7 @@ include_once '../config/connection.php';
               $i = 0; // i = index
               while ($i < $c) {
                 echo "
-                  <option value='".$r[$i]["teacher_name"]."'>".$r[$i]["teacher_name"]."</option>
+                  <option value='".$r[$i]["id_teacher"]."'>".$r[$i]["teacher_name"]."</option>
                     ";
                 $i++;
               }

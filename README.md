@@ -2,9 +2,14 @@
 gsbsup
 
 ## Todo
+- Delete Student from Class
+
+
 - [x] In "Add Student Payment" create new Input "Payment Date"
+- [x] In "Check Payement of the Student" add "Payment Date"
 - [x] In "Add Teacher Payment" create new input "Payment Date"
-- [x] When Update Class: update Teacher Name and Subject Name also
+- [x] In "Check Payement of the Teacher" add "Payment Date"
+- [x] When Update Class Name, update Teacher Name and Subject Name also
 
 - [x] When Update Student Name, it's not updated in payement page (payement journal)
 - [x] When Update Teacher Name, it's not updated in payement page (payement journal)

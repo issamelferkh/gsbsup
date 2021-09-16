@@ -54,7 +54,7 @@ include_once '../config/connection.php';
         <div class="p-2 col-md-4">
           Select a Teacher
           <select name="teacher_name" class="form-select" required>
-            <option value="<?= $row['teacher_name']; ?>"><?= $row['teacher_name']; ?></option>
+            <!-- <option value="<?= $row['teacher_name']; ?>"><?= $row['teacher_name']; ?></option> -->
             <!-- Fech Teacher Data -->
             <?php
               $q = "SELECT * FROM `teacher`"; //q = query

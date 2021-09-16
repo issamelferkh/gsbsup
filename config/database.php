@@ -1,8 +1,8 @@
 <?php
-    $DB_DSN = 'mysql:dbname=gsbsupma_db;host=127.0.0.1';
+    $DB_DSN = 'mysql:dbname=gsbsupma_db2;host=127.0.0.1';
     $DB_USER = 'root';
     $DB_PASSWORD = '';
-    $DB_NAME = 'gsbsupma_db';
+    // $DB_NAME = 'gsbsupma_db23';
     $DB_HOST = '127.0.0.1';
 
     // $DB_DSN = 'mysql:dbname=gsbsupma_db;host=localhost:3306';
