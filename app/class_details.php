@@ -43,20 +43,26 @@
         </thead>
         <tbody>
         <?php
-          $class_name = $row['class_name'];
-          $sql = "SELECT * FROM `class` WHERE `student_name` > '' AND `class_name` = '".$class_name."' ";
-          $sql = $db->query($sql);
-          $sql->execute();
-          $count = $sql->rowCount(); //c = count
-          $row = $sql->fetchAll(PDO::FETCH_ASSOC);
-          $i = 0;
-          while($i < $count) {
+          $id_class = $row['id_class'];
+
+          $query3 = "SELECT * FROM `student_has_class` WHERE `id_class` = '".$id_class."' ";
+          $query3 = $db->query($query3);
+          $query3->execute();
+          $count3 = $query3->rowCount(); //c = count
+          $row3 = $query3->fetchAll(PDO::FETCH_ASSOC);
+          $i3 = 0;
+          while($i3 < $count3) {
+            $query4 = 'SELECT * FROM `student` WHERE `id_student` = "'.$row3[$i3]["id_student"].'"';
+            $result4 = $db->query($query4);
+            $row4 = $result4->fetch(PDO::FETCH_ASSOC);
+
+
             echo "
               <tr>
-                <td>".$row[$i]["student_name"]."</td>
+                <td>".$row4["student_name"]."</td>
               </tr>
                 ";
-            $i++;
+            $i3++;
           }
         ?>
         </tbody>

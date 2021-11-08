@@ -22,6 +22,9 @@
         <li class="nav-item">
           <a class="nav-link" href="../app/payement_check_teacher.php">Payement</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../app/absence_add.php">Absence</a>
+        </li>
         <!-- <li class="nav-item">
           <a class="nav-link" href="#">Switch account</a>
         </li>

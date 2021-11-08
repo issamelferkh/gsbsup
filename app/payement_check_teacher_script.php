@@ -50,7 +50,7 @@
               while ($i < $c) {
                 echo "
                   <tr>
-                    <td>".$r[$i]["pay_date"]."</td>
+                    <td><a href='payement_delete_teacher_script.php?id=".$r[$i]["id_payement_teacher"]."' onclick='return myConfirm();' class='btn btn-danger'>X</a> ".$r[$i]["pay_date"]."</td>
                     <td>".$r[$i]["remarque"]."</td>
                     <td>".$r[$i]["pay_amount"]." Dhs</td>
                   </tr>
@@ -65,5 +65,16 @@
     </form>
   </div>
 </main>
+
+<script>
+  function myConfirm() {
+    var result = confirm("Are you sure to delete this item?");
+    if (result==true) {
+    return true;
+    } else {
+    return false;
+    }
+  }
+</script>
 
 <?php include_once("./../includes/footer.php"); ?>

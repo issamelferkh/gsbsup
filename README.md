@@ -2,6 +2,11 @@
 gsbsup
 
 ## Todo
+- fixed
+  - Dont fetch student list in class detail #12
+
+
+  
 - Delete Student from Class
 - Check duplicate Student in Add
 - Check duplicate Class in Add
